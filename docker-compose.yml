@@ -1,0 +1,111 @@
+name: dualy
+
+services:
+  # PostgreSQL Database
+  postgres:
+    container_name: dualy-postgres
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_DATABASE:-dualy}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - dualy-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d dualy']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NestJS Backend API
+  backend:
+    container_name: dualy-backend
+    build:
+      context: ./dualy-backend
+      dockerfile: Dockerfile
+      target: production
+    restart: unless-stopped
+    ports:
+      - '${APP_PORT:-3000}:3000'
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      APP_NAME: ${APP_NAME:-Dualy}
+      APP_PORT: 3000
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      
+      # Database - connect to postgres service
+      DB_TYPE: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_DATABASE: ${DB_DATABASE:-dualy}
+      
+      # JWT
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-this-in-production-min-32-chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-8h}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-your-super-secret-refresh-key-change-this-in-production-min-32-chars}
+      JWT_REFRESH_EXPIRES_IN: ${JWT_REFRESH_EXPIRES_IN:-7d}
+      
+      # Email
+      MAIL_HOST: ${MAIL_HOST:-smtp.mailtrap.io}
+      MAIL_PORT: ${MAIL_PORT:-2525}
+      MAIL_USER: ${MAIL_USER:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-noreply@dualy.com}
+      
+      # Admin
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@dualy.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@123}
+      
+      # API
+      API_PREFIX: ${API_PREFIX:-api}
+      API_VERSION: ${API_VERSION:-v1}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dualy-network
+    command: >
+      sh -c "
+        echo '⏳ Waiting for database...' &&
+        sleep 5 &&
+        echo '🔄 Running migrations...' &&
+        npm run migration:run &&
+        echo '🌱 Running seeds...' &&
+        (npm run seed || echo '⚠️  Seeds skipped') &&
+        echo '🚀 Starting application...' &&
+        node dist/main
+      "
+
+  # React Admin Panel
+  admin:
+    container_name: dualy-admin
+    build:
+      context: ./dualy-admin
+      dockerfile: Dockerfile
+      target: production
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:3000/api/v1}
+    restart: unless-stopped
+    ports:
+      - '${ADMIN_PORT:-80}:80'
+    depends_on:
+      - backend
+    networks:
+      - dualy-network
+
+volumes:
+  postgres-data:
+    name: dualy-postgres-data
+
+networks:
+  dualy-network:
+    name: dualy-network
+    driver: bridge
