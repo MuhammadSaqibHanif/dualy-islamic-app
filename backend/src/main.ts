@@ -33,8 +33,8 @@ async function bootstrap() {
 
   // Swagger setup
   const config = new DocumentBuilder()
-    .setTitle('Dualy Islamic App API')
-    .setDescription('API documentation for Dualy backend')
+    .setTitle('Dualy API')
+    .setDescription('Dualy Backend API Documentation')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -42,7 +42,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(3000);
+  await app.listen(3000, '0.0.0.0');
   console.log(`Application is running on: ${await app.getUrl()}`);
   console.log(`Swagger docs available at: ${await app.getUrl()}/api/docs`);
 }

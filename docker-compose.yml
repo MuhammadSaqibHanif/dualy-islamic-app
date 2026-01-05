@@ -25,9 +25,9 @@ services:
 
   # NestJS Backend API
   backend:
-    container_name: dualy-backend
+    container_name: backend
     build:
-      context: ./dualy-backend
+      context: ./backend
       dockerfile: Dockerfile
       target: production
     restart: unless-stopped
@@ -86,9 +86,9 @@ services:
 
   # React Admin Panel
   admin:
-    container_name: dualy-admin
+    container_name: admin
     build:
-      context: ./dualy-admin
+      context: ./admin
       dockerfile: Dockerfile
       target: production
       args:

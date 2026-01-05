@@ -45,30 +45,30 @@ Write-Host ""
 Write-Host "🔍 Checking project structure..." -ForegroundColor Cyan
 
 # Check if required directories exist
-if (-Not (Test-Path "dualy-backend")) {
-    Write-Host "❌ dualy-backend directory not found!" -ForegroundColor Red
+if (-Not (Test-Path "backend")) {
+    Write-Host "❌ backend directory not found!" -ForegroundColor Red
     Write-Host "   Please make sure you're in the correct directory." -ForegroundColor Yellow
     exit 1
 }
 
-if (-Not (Test-Path "dualy-admin")) {
-    Write-Host "❌ dualy-admin directory not found!" -ForegroundColor Red
+if (-Not (Test-Path "admin")) {
+    Write-Host "❌ admin directory not found!" -ForegroundColor Red
     Write-Host "   Please make sure you're in the correct directory." -ForegroundColor Yellow
     exit 1
 }
 
-Write-Host "✅ dualy-backend directory found" -ForegroundColor Green
-Write-Host "✅ dualy-admin directory found" -ForegroundColor Green
+Write-Host "✅ backend directory found" -ForegroundColor Green
+Write-Host "✅ admin directory found" -ForegroundColor Green
 
 # Check if Dockerfiles exist
-if (-Not (Test-Path "dualy-backend/Dockerfile")) {
+if (-Not (Test-Path "backend/Dockerfile")) {
     Write-Host "⚠️  Backend Dockerfile not found!" -ForegroundColor Yellow
-    Write-Host "   Please copy Dockerfile to dualy-backend/" -ForegroundColor Yellow
+    Write-Host "   Please copy Dockerfile to backend/" -ForegroundColor Yellow
 }
 
-if (-Not (Test-Path "dualy-admin/Dockerfile")) {
+if (-Not (Test-Path "admin/Dockerfile")) {
     Write-Host "⚠️  Admin Dockerfile not found!" -ForegroundColor Yellow
-    Write-Host "   Please copy Dockerfile to dualy-admin/" -ForegroundColor Yellow
+    Write-Host "   Please copy Dockerfile to admin/" -ForegroundColor Yellow
 }
 
 Write-Host ""

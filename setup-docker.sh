@@ -45,30 +45,30 @@ echo ""
 echo "🔍 Checking project structure..."
 
 # Check if required directories exist
-if [ ! -d "dualy-backend" ]; then
-    echo "❌ dualy-backend directory not found!"
+if [ ! -d "backend" ]; then
+    echo "❌ backend directory not found!"
     echo "   Please make sure you're in the correct directory."
     exit 1
 fi
 
-if [ ! -d "dualy-admin" ]; then
-    echo "❌ dualy-admin directory not found!"
+if [ ! -d "admin" ]; then
+    echo "❌ admin directory not found!"
     echo "   Please make sure you're in the correct directory."
     exit 1
 fi
 
-echo "✅ dualy-backend directory found"
-echo "✅ dualy-admin directory found"
+echo "✅ backend directory found"
+echo "✅ admin directory found"
 
 # Check if Dockerfiles exist
-if [ ! -f "dualy-backend/Dockerfile" ]; then
+if [ ! -f "backend/Dockerfile" ]; then
     echo "⚠️  Backend Dockerfile not found!"
-    echo "   Please copy Dockerfile to dualy-backend/"
+    echo "   Please copy Dockerfile to backend/"
 fi
 
-if [ ! -f "dualy-admin/Dockerfile" ]; then
+if [ ! -f "admin/Dockerfile" ]; then
     echo "⚠️  Admin Dockerfile not found!"
-    echo "   Please copy Dockerfile to dualy-admin/"
+    echo "   Please copy Dockerfile to admin/"
 fi
 
 echo ""

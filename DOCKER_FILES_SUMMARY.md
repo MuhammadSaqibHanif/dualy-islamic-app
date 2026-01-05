@@ -19,13 +19,13 @@ I've created **12 files** for a complete Docker setup that works on **Mac, Windo
 6. ✅ **setup-docker.ps1** - Interactive setup (Windows)
 
 ### **🔨 Backend Files (2 files):**
-7. ✅ **Dockerfile** (for dualy-backend)
-8. ✅ **.dockerignore** (for dualy-backend)
+7. ✅ **Dockerfile** (for backend)
+8. ✅ **.dockerignore** (for backend)
 
 ### **🎨 Admin Files (3 files):**
-9. ✅ **Dockerfile** (for dualy-admin)
-10. ✅ **nginx.conf** (for dualy-admin)
-11. ✅ **.dockerignore** (for dualy-admin)
+9. ✅ **Dockerfile** (for admin)
+10. ✅ **nginx.conf** (for admin)
+11. ✅ **.dockerignore** (for admin)
 
 ### **🔌 Updated Code (1 file):**
 12. ✅ **api.docker.js** - Updated API service with env variables
@@ -35,15 +35,15 @@ I've created **12 files** for a complete Docker setup that works on **Mac, Windo
 ## 📁 HOW TO ORGANIZE FILES
 
 ```
-dualy-project/                  ← Create this parent folder
+dualy-be/                  ← Create this parent folder
 │
-├── dualy-backend/              ← Your existing backend
+├── backend/              ← Your existing backend
 │   ├── src/
 │   ├── package.json
 │   ├── Dockerfile              ← Copy here (file #7)
 │   └── .dockerignore           ← Copy here (file #8)
 │
-├── dualy-admin/                ← Your existing admin
+├── admin/                ← Your existing admin
 │   ├── src/
 │   │   └── services/
 │   │       └── api.js          ← Replace with api.docker.js (file #12)
@@ -67,19 +67,19 @@ dualy-project/                  ← Create this parent folder
 ### **Step 1: Organize Files**
 ```bash
 # Create parent directory
-mkdir dualy-project
-cd dualy-project
+mkdir dualy-be
+cd dualy-be
 
 # Move your existing projects here
-mv /path/to/dualy-backend ./
-mv /path/to/dualy-admin ./
+mv /path/to/backend ./
+mv /path/to/admin ./
 
 # Copy all Docker files as shown in structure above
 ```
 
 ### **Step 2: Copy Backend Files**
 ```bash
-cd dualy-backend
+cd backend
 
 # Copy these files here:
 # - Dockerfile (backend version)
@@ -90,7 +90,7 @@ cd ..
 
 ### **Step 3: Copy Admin Files**
 ```bash
-cd dualy-admin
+cd admin
 
 # Copy these files here:
 # - Dockerfile (admin version)
@@ -105,7 +105,7 @@ cd ..
 
 ### **Step 4: Copy Root Files**
 ```bash
-# In dualy-project/ directory:
+# In dualy-be/ directory:
 
 # Copy these files here:
 # - docker-compose.yml

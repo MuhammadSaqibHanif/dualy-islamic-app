@@ -31,24 +31,24 @@ All running in Docker! 🚀
 
 ### **Root Directory:**
 ```
-dualy-project/
-├── dualy-backend/          (your existing backend code)
-├── dualy-admin/            (your existing admin code)
+dualy-be/
+├── backend/          (your existing backend code)
+├── admin/            (your existing admin code)
 ├── docker-compose.yml      ⭐ NEW
 └── .env                    ⭐ NEW (copy from .env.docker)
 ```
 
-### **Backend Files (dualy-backend/):**
+### **Backend Files (backend/):**
 ```
-dualy-backend/
+backend/
 ├── Dockerfile              ⭐ NEW
 ├── .dockerignore           ⭐ NEW
 └── (rest of your code)
 ```
 
-### **Admin Files (dualy-admin/):**
+### **Admin Files (admin/):**
 ```
-dualy-admin/
+admin/
 ├── Dockerfile              ⭐ NEW
 ├── nginx.conf              ⭐ NEW
 ├── .dockerignore           ⭐ NEW
@@ -159,9 +159,9 @@ Interactive menu to:
 |------|---------|
 | `docker-compose.yml` | Orchestrates all 3 services (DB, Backend, Admin) |
 | `.env` | Environment variables (database passwords, JWT secrets, etc.) |
-| `dualy-backend/Dockerfile` | Builds backend Docker image |
-| `dualy-admin/Dockerfile` | Builds admin panel Docker image |
-| `dualy-admin/nginx.conf` | Nginx configuration for serving React app |
+| `backend/Dockerfile` | Builds backend Docker image |
+| `admin/Dockerfile` | Builds admin panel Docker image |
+| `admin/nginx.conf` | Nginx configuration for serving React app |
 | `.dockerignore` | Files to exclude from Docker build |
 | `api.docker.js` | Updated API service with environment variable support |
 | `setup-docker.sh` | Interactive setup script (Mac/Linux) |
@@ -261,15 +261,15 @@ For complete documentation, see **DOCKER_SETUP_GUIDE.md** which includes:
 ## 🎯 PROJECT STRUCTURE AFTER SETUP
 
 ```
-dualy-project/
+dualy-be/
 │
-├── dualy-backend/              # NestJS Backend
+├── backend/              # NestJS Backend
 │   ├── src/
 │   ├── Dockerfile              ⭐
 │   ├── .dockerignore           ⭐
 │   └── package.json
 │
-├── dualy-admin/                # React Admin
+├── admin/                # React Admin
 │   ├── src/
 │   ├── Dockerfile              ⭐
 │   ├── nginx.conf              ⭐

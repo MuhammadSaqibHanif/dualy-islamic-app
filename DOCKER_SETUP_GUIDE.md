@@ -44,8 +44,8 @@ docker compose version
 
 ```bash
 # 1. Create project structure
-mkdir dualy-project
-cd dualy-project
+mkdir dualy-be
+cd dualy-be
 
 # 2. Copy all files (backend, admin, docker-compose.yml, .env.docker)
 # (Files structure shown below)
@@ -67,8 +67,8 @@ docker compose up -d
 Your final project structure should look like this:
 
 ```
-dualy-project/
-├── dualy-backend/              # Backend NestJS code
+dualy-be/
+├── backend/              # Backend NestJS code
 │   ├── src/
 │   ├── package.json
 │   ├── tsconfig.json
@@ -76,7 +76,7 @@ dualy-project/
 │   ├── .dockerignore           ⭐ NEW
 │   └── .env                    (keep your existing one)
 │
-├── dualy-admin/                # Admin React code
+├── admin/                # Admin React code
 │   ├── src/
 │   │   └── services/
 │   │       └── api.js          ⭐ UPDATE (use api.docker.js)
@@ -98,7 +98,7 @@ dualy-project/
 ### **Step 1: Prepare Backend**
 
 ```bash
-cd dualy-backend
+cd backend
 
 # Copy these files (I've created them for you):
 # - Dockerfile
@@ -110,7 +110,7 @@ cd dualy-backend
 ### **Step 2: Prepare Admin Panel**
 
 ```bash
-cd dualy-admin
+cd admin
 
 # Copy these files (I've created them for you):
 # - Dockerfile
@@ -554,7 +554,7 @@ After `docker compose up -d`, verify:
 docker stats
 
 # Specific container
-docker stats dualy-backend
+docker stats backend
 ```
 
 ### **View Disk Usage**
@@ -678,16 +678,16 @@ docker volume prune
 docker system prune -a --volumes
 
 # View container logs
-docker logs dualy-backend
+docker logs backend
 
 # Execute command in container
-docker exec -it dualy-backend sh
+docker exec -it backend sh
 
 # Copy files from container
-docker cp dualy-backend:/app/dist ./dist
+docker cp backend:/app/dist ./dist
 
 # Copy files to container
-docker cp ./local-file dualy-backend:/app/
+docker cp ./local-file backend:/app/
 ```
 
 ---

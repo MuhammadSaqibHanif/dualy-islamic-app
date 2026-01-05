@@ -1,4 +1,4 @@
-# 🕌 Dualy - Islamic Companion App
+# 🕌 Dualy - Islamic App
 
 A comprehensive Islamic app featuring duas (supplications), dhikr challenges, and daily spiritual practices.
 
@@ -27,8 +27,8 @@ A comprehensive Islamic app featuring duas (supplications), dhikr challenges, an
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/dualy-islamic-app.git
-cd dualy-islamic-app
+git clone https://github.com/yourusername/dualy-be.git
+cd dualy-be
 ```
 
 2. **Set up environment**
@@ -53,7 +53,7 @@ docker compose up -d
 
 ## 📁 Project Structure
 ```
-dualy-islamic-app/
+dualy-be/
 ├── backend/           # NestJS backend API
 │   ├── src/
 │   ├── Dockerfile
@@ -99,18 +99,6 @@ npm run dev
 
 Swagger docs available at: `http://localhost:3000/api/docs`
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
-
 ## 📄 License
 
 Copyright © 2026 Dualy Team
-
-## 👥 Team
-
-Developed with ❤️ for the Muslim community
