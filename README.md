@@ -1,6 +1,6 @@
-# 🕌 Dualy - Islamic App
+# 🕌 Dualy - App
 
-A comprehensive Islamic app featuring duas (supplications), dhikr challenges, and daily spiritual practices.
+A comprehensive app featuring duas (supplications), dhikr challenges, and daily spiritual practices.
 
 ## 🌟 Features
 

@@ -1,0 +1,86 @@
+name: dualy-dev
+
+services:
+  postgres:
+    container_name: dualy-postgres-dev
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dualy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - dualy-network
+
+  backend:
+    container_name: backend-dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: >
+      sh -c "
+        echo '⏳ Waiting for database...' &&
+        sleep 3 &&
+        echo '🔄 Running migrations...' &&
+        npm run migration:run &&
+        echo '🌱 Running seeds...' &&
+        npm run seed &&
+        echo '🚀 Starting backend (watch mode)...' &&
+        npm run start:dev
+      "
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+
+      # App
+      APP_NAME: Dualy
+      APP_PORT: 3000
+
+      # Database
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: dualy
+
+      # JWT (DEV SAFE)
+      JWT_SECRET: dev-jwt-secret-please-change-in-prod-123456
+      JWT_REFRESH_SECRET: dev-refresh-secret-please-change-in-prod-123456
+      JWT_EXPIRES_IN: 8h
+      JWT_REFRESH_EXPIRES_IN: 7d
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - dualy-network
+
+  admin:
+    container_name: admin-dev
+    build:
+      context: ./admin
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./admin:/app
+      - /app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:3000/api/v1
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - dualy-network
+
+volumes:
+  postgres-data:
+
+networks:
+  dualy-network:
+    driver: bridge

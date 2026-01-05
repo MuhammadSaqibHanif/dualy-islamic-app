@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Dualy Islamic App Backend API",
+  "description": "Dualy App Backend API",
   "author": "Dualy Team",
   "private": true,
   "license": "UNLICENSED",

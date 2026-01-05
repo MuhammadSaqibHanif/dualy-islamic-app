@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dualy Docker Setup Script
-# This script sets up the Docker environment for Dualy Islamic App
+# This script sets up the Docker environment for Dualy App
 
 set -e  # Exit on error
 
@@ -79,10 +79,11 @@ echo "3) Start existing containers"
 echo "4) Stop all services"
 echo "5) View logs"
 echo "6) Reset everything (⚠️  deletes all data)"
-echo "7) Exit"
+echo "7) Start DEVELOPMENT mode (hot reload)"
+echo "8) Exit"
 echo ""
 
-read -p "Choose an option (1-7): " choice
+read -p "Choose an option (1-8): " choice
 
 case $choice in
     1)
@@ -159,8 +160,14 @@ case $choice in
             echo "❌ Cancelled"
         fi
         ;;
-    
+
     7)
+        echo ""
+        echo "🔥 Starting DEVELOPMENT mode with hot reload..."
+        docker compose -f docker-compose.dev.yml up --build
+        ;;
+    
+    8)
         echo "👋 Goodbye!"
         exit 0
         ;;

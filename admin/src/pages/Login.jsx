@@ -37,7 +37,7 @@ export default function Login() {
             <BookOpen className="w-8 h-8 text-primary-600" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Dualy Admin</h1>
-          <p className="text-gray-600 mt-2">Sign in to manage your Islamic app</p>
+          <p className="text-gray-600 mt-2">Sign in to manage your app</p>
         </div>
 
         {error && (
