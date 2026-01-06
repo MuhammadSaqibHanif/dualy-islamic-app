@@ -90,11 +90,6 @@ export default function Login() {
             )}
           </button>
         </form>
-
-        <div className="mt-6 text-center text-sm text-gray-600">
-          <p>Default credentials:</p>
-          <p className="font-mono text-xs mt-1">admin@dualy.com / Admin@123</p>
-        </div>
       </div>
     </div>
   );
